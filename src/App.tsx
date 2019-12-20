@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { FilmesList } from './FilmesList';
+import { FilmeDetalhe } from './FilmeDetalhe';
+import { Filme, getFilmes } from './filmes-service';
+import { Alert } from './Alert';
 
-const App: React.FC = () => {
+export function App () {
+  const [filme, setFilme] = useState<Filme | undefined>(undefined)
+  const [filmes, setFilmes] = useState<Filme[]>([])
+
+  useEffect(() => {
+    getFilmes().then(setFilmes)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <span className="navbar-brand">Awesome StarWarsPedia</span>
+      </nav>
+      <br/>
+      <div className="row">
+        <FilmesList 
+          filmes={filmes}
+          className="col-6" 
+          handleFilmeClick={setFilme} 
+        />
+        {
+          filme ? 
+          (<FilmeDetalhe 
+            className="col-6" 
+            filme={filme}
+          />) 
+          : 
+          (<Alert msg="É necessario escolher um filme" type="warning"/>)
+        }
+      </div>
     </div>
-  );
+  )
 }
-
-export default App;
