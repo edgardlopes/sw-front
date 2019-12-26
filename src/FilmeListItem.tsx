@@ -8,5 +8,5 @@ type FilmeListItemProps = {
 
 export function FilmeListItem(props: FilmeListItemProps) {
     const {handleClick, filme} = props
-    return <button className="list-group-item list-group-item-action" onClick={handleClick}>{filme.nome}</button>
+    return <button className="filme-item-list list-group-item list-group-item-action" onClick={handleClick}>{filme.nome}</button>
 }

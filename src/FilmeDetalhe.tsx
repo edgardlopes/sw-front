@@ -1,28 +1,20 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Filme, getPersonagens, Personagem } from './filmes-service'
 import { PersonagensList } from './PersonagensList'
 import { Spinner } from './Spinner'
+import usePersonagens from './usePersonagens'
 
 type FilmeDetalheProps = {
     className?: string
     filme: Filme
 }
 
-
 export function FilmeDetalhe(props: FilmeDetalheProps) {
     const {className, filme} = props
 
-    const [personagens, setPersonagens] = React.useState<Personagem[]>([])
-    const [loading, setLoading] = React.useState<boolean>(false)
+    const { personagens, isLoading } = usePersonagens(filme.id)
     
-    React.useEffect(() => {
-        setLoading(true)
-        getPersonagens(props.filme.id)//
-            .then(setPersonagens)
-            .then(() => setLoading(false))
-    }, [props.filme])
-    
-    if(loading) {
+    if(isLoading) {
         return <Spinner />
     }
     

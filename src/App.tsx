@@ -25,11 +25,7 @@ export function App () {
           handleFilmeClick={setFilme} 
         />
         {
-          filme ? 
-          (<FilmeDetalhe 
-            className="col-6" 
-            filme={filme}
-          />) 
+          filme ? (<FilmeDetalhe className="col-6" filme={filme}/>) 
           : 
           (<Alert msg="É necessario escolher um filme" type="warning"/>)
         }
