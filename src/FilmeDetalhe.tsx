@@ -22,8 +22,8 @@ export function FilmeDetalhe(props: FilmeDetalheProps) {
         <div className={className}>
             <div className="card" >
                 <div className="card-body">
-                    <h5 className="card-title">{filme.nome}</h5>
-                    <p className="card-text">{filme.abertura}</p>
+                    <h5 className="card-title" data-testid="filme-nome">{filme.nome}</h5>
+                    <p className="card-text" data-testid="filme-abertura">{filme.abertura}</p>
                 </div>
                 <PersonagensList personagens={personagens} />
             </div>

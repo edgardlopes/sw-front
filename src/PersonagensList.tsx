@@ -6,7 +6,6 @@ type PersonagensListProps = {
 }
 
 export function PersonagensList({ personagens }:PersonagensListProps) {
-  
     return (
         <ul className="list-group list-group-flush">
             {renderPersonagens(personagens)}            
@@ -15,4 +14,10 @@ export function PersonagensList({ personagens }:PersonagensListProps) {
 }
 
 const renderPersonagens = (personagens: Personagem[]) => 
-    personagens.map(personagem => (<li key={personagem.nome} className="list-group-item personagem">{personagem.nome}</li>))
+    personagens.map(personagem => 
+        (<li 
+            key={personagem.nome} 
+            data-testid="personagem-item-list"
+            className="list-group-item">
+                {personagem.nome}
+        </li>))

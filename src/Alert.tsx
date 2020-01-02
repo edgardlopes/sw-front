@@ -6,7 +6,7 @@ type AlertProps = {
 }
 
 export const Alert: React.SFC<AlertProps> = (props) => (
-    <div className={`alert alert-${props.type}`} role="alert">
+    <div className={`alert alert-${props.type}`} role="alert" data-testid="alert">
         {props.msg}
     </div>
 )

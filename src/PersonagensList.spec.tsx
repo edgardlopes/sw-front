@@ -1,22 +1,24 @@
-import { shallow } from 'enzyme';
-import React from 'react';
-import { configure } from 'enzyme';
+import React from 'react'
+import { Personagem } from './filmes-service'
+import { render } from '@testing-library/react'
+import { PersonagensList } from './PersonagensList'
 
-import Adapter from 'enzyme-adapter-react-16';
-import { Personagem } from './filmes-service';
-import { PersonagensList } from './PersonagensList';
+describe('PersonagensList', () => {
 
-configure({ adapter: new Adapter() });
-
-describe('FilmesList', () => {
-    it('deve exibir a lista corretamente', () => {
-        const personagens: Personagem[] = [
-            { nome: "Fulaninho" },
-            { nome: "Fulaninho 2" }
+    it('deve renderizar a lista de personagens', () => {
+        const personagens: Personagem[] =[
+            { nome: 'Ze pequeno' },
+            { nome: 'Bátima' }
         ]
 
-        const component = shallow(<PersonagensList personagens={personagens} />)
-        
-        expect(component.find('.personagem')).toHaveLength(2)
+        const { getAllByTestId } = render(<PersonagensList personagens={personagens}/>)
+
+        expect(getAllByTestId('personagem-item-list').length).toBe(2)
+
+        // console.log(getAllByTestId('personagem-item-list')[0].innerHTML)
+
+        expect(getAllByTestId('personagem-item-list')[0].innerHTML).toBe(personagens[0].nome)
+
     })
+
 })
